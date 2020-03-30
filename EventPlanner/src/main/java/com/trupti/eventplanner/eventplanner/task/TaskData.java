@@ -1,13 +1,23 @@
 package com.trupti.eventplanner.eventplanner.task;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 public class TaskData {
     private int taskId;
+    @NotNull
+    @Size(min = 4,message = "Task should be atleast 4 characters")
     private String taskName;
     private String taskDescription;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
+    private boolean markAsDone;
 
     public TaskData(int taskId, String taskName, String taskDescription, Date date) {
         this.taskId = taskId;
@@ -46,5 +56,13 @@ public class TaskData {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public boolean isMarkAsDone() {
+        return markAsDone;
+    }
+
+    public void setMarkAsDone(boolean markAsDone) {
+        this.markAsDone = markAsDone;
     }
 }
